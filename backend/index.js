@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/send_mail', cors(), async (req, res) => {
+  console.log('enters');
   let { text } = req.body;
   const transport = nodemailer.createTransport({
     host: process.env.MAIL_HOST,
@@ -42,9 +43,6 @@ app.post('/send_mail', cors(), async (req, res) => {
   });
 });
 
-app.listen(
-  (process.env.PORT || 4000,
-  () => {
-    console.log(`Server is listening on port ${app.get('port')}`);
-  })
-);
+const server = app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${server.address().port}`);
+});
